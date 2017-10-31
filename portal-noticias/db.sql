@@ -8,5 +8,3 @@ create table noticias (
   noticia text,
   data_criacao timestamp default current_timestamp
 );
-
-insert into noticias(titulo, noticia) values ('Título da notícia', 'Conteúdo da notícia');
