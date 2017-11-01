@@ -2,10 +2,11 @@
 module.exports = function(app) {
 
     app.get('/noticia', function(req, res) {
-        
+
         var connection = app.config.dbConnection();
-        
-        connection.query('select * from noticias where id_noticia = 2', function(error, result) {
+        var noticiasModel = app.app.models.noticiasModel;
+
+        noticiasModel.getNoticia(connection, function(error, result) {
             if (!error) {
                 res.render('noticias/noticia', { noticia: result[0] });
             }
