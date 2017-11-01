@@ -1,5 +1,5 @@
 var app = require('./config/server');
 
 app.listen(3000, function() {
-    console.log("Servidor executando....");
+    console.log("Servidor executando na porta 3000...");
 });
