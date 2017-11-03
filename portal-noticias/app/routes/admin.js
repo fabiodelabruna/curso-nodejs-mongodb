@@ -1,17 +1,15 @@
 module.exports = function(app) {
     app.get('/formulario_inclusao_noticia', function(req, res) {
-        res.render('admin/form_add_noticia');
+        res.render('admin/form_add_noticia', { validacao: {} });
     });
 
     app.post('/noticias/salvar', function(req, res) {
         var moment = require('moment');
         var noticia = req.body;
 
-        console.log(noticia);
-
         req.assert('titulo', 'Título é obrigatório').notEmpty();
         req.assert('resumo', 'Resumo é obrigatório').notEmpty();
-        req.assert('resumo', 'Resumo deve conter eentre 10 e 100 caracteres').len(10, 100);
+        req.assert('resumo', 'Resumo deve conter entre 10 e 100 caracteres').len(10, 100);
         req.assert('autor', 'Autor é obrigatório').notEmpty();
         req.assert('noticia', 'Notícia é obrigatório').notEmpty();
 
@@ -26,13 +24,13 @@ module.exports = function(app) {
             validationErrors.push({
                 location: 'body',
                 param: 'data',
-                msg: 'A data da notícia deve estar no formato DD/MM/AAAA',
+                msg: 'A data da notícia deve estar no formato dd/mm/aaaa',
                 value: ''
             });
         }
 
         if (validationErrors) {
-            res.render('admin/form_add_noticia');
+            res.render('admin/form_add_noticia', { validacao:  validationErrors});
             return;
         }
 
