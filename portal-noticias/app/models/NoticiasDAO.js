@@ -2,8 +2,8 @@ function NoticiasDAO(connection) {
     this._connection = connection;
 }
 
-NoticiasDAO.prototype.getNoticia = function (callback) {
-    this._connection.query('select * from noticias where id_noticia = 10', callback);
+NoticiasDAO.prototype.getNoticia = function (queryParam, callback) {
+    this._connection.query('select * from noticias where id_noticia = ' + queryParam.id_noticia, callback);
 }
 
 NoticiasDAO.prototype.getNoticias = function (callback) {
