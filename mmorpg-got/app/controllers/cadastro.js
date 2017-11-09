@@ -11,11 +11,16 @@ module.exports.cadastrar = function(application, req, res) {
     req.assert('casa', 'Casa deve ser selecionada').notEmpty();
 
     var erros = req.validationErrors();
-    
+
     if (erros) {
         res.render('cadastro', { validacao: erros, dadosForm: dadosForm });
         return;
     }
+
+    var connection = application.config.dbConnection;
+    var usuarioDao = new application.app.models.UsuarioDAO(connection);
+
+    usuarioDao.inserir(dadosForm);
 
     res.send('ok');
 
